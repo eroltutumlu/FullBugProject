@@ -1,0 +1,70 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html ng-app="GirisApp">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Soğuksu Kur'an Kursu Giriş Sistemi</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet"/>
+    <link href="~/Content/metisMenu.min.css" rel="stylesheet" />
+    <link href="~/Content/sb-admin-2.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/ladda-themeless.min.css" rel="stylesheet" type="text/css">
+</head>
+<body ng-controller="GirisCtrl">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <div class="login-panel panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Giriş Sistemi</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form ng-submit="GirisYap(Giris)">
+                            <fieldset>
+                                <div class="form-group">
+                                    <input class="form-control" ng-model="Giris.Name" placeholder="Adınız Soyadınız" name="Name" type="text" required>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" ng-model="Giris.KullaniciSifre" placeholder="Şifreniz" name="KullaniciSifre" required type="password">
+                                </div>
+                                <div ng-show="!GirisBasarisiz">
+
+                                    <div class="form-group">
+                                        <p class="text-danger">
+                                            Lütfen şifrenizi yada kullanıcı adınızı kontrol edin
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <button type="submit" ladda="loading" data-style="expand-right" class="btn btn-lg btn-success btn-block">
+                                    <span ng-show="!loading">Giriş Yap</span>
+                                    <span ng-show="loading">Güvenlik taraması yapılıyor.</span>
+                                </button>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/Scripts/jquery-2.1.4.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/metisMenu.min.js"></script>
+    <script src="~/Scripts/sb-admin-2.js"></script>
+    <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/angularjs/systemLogin.js"></script>
+
+    <script src="~/Scripts/spin.js"></script>
+    <script src="~/Scripts/ladda.js"></script>
+    <script src="~/Scripts/angular-ladda.min.js"></script>
+</body>
+</html>

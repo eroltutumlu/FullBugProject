@@ -1,0 +1,75 @@
+﻿body {
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+
+.navbar{
+    min-height:60px !important;
+    margin-top:0 !important;
+    padding-top:0 !important;
+
+}
+
+.navbar-brand{
+    height:auto !important;
+    padding-top:15px !important;
+}
+
+.logo-nav img{
+    padding-top:0 !important;
+    margin-top:0 !important;
+    height:450%;
+    width:60%;
+}
+
+.carousel-inner img {
+    -webkit-filter: grayscale(50%);
+    filter: grayscale(50%); /* make all photos black and white */ 
+    width: 100%; /* Set width to 100% */
+    height:450px !important;
+    margin: auto;
+}
+
+.carousel-caption h3 {
+    color: #fff !important;
+}
+
+@media (max-width: 600px) {
+    .carousel-caption {
+        display: none; /* Hide the carousel text when the screen is less than 600 pixels wide */
+    }
+}
+
+.panel-b{
+    border:0 !important;
+}
+
+footer{
+    background-color:#333;
+    color:#fff;
+    padding:30px 0 20px 0;
+}
+
+footer li{
+    float:left;
+    list-style:none;
+    padding:0 10px 0 10px;
+}
+footer a{
+    color:#fff;
+}
+footer p{
+    float:right;
+}

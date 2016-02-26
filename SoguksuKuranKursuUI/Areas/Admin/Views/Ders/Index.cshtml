@@ -1,0 +1,108 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br /><br />
+
+<div class="row" ng-app="DersModul">
+    <div class="col-md-12">
+        <div class="panel panel-green">
+            <div class="panel-heading">
+                Ders İşlemleri
+            </div>
+            <div class="panel-body" ng-controller="DersCtrl">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <form class="form-inline well well-sm">
+                            <span class="glyphicon glyphicon-search"></span>
+                            <div class="form-group">
+                                <input type="text" class="form-control" ng-model="Ara" placeholder="Arama yapın" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <form ng-submit="DersEkle(Ders)" ng-show="yeniKayit">
+                            <div class="form-group">
+                                <label>Ders Adı</label>
+                                <input class="form-control" name="DersAdi"  ng-model="Ders.DersAdi" placeholder="Ders adını giriniz." required/>
+                            </div>
+                            <div class="form-group">
+                                <label>Ders Açıklaması</label>
+                                <input class="form-control" name="DersAciklamasi" ng-model="Ders.DersAciklamasi" placeholder="Kısa bir açıklama giriniz." required />
+                            </div>
+                            <div class="form-group">
+                                <label>Bölüm Seçiniz</label>
+                                <select class="form-control" ng-model="Ders.BolumId" ng-options="I.TabloId as I.BolumAdi for I in BolumSelectList" required>
+                                    <option value="">Bölüm Seçiniz</option>
+                                </select>
+                            </div>
+                            <input type="hidden" ng-model="Ders.TabloId" name="TabloId" class="btn btn-danger" />
+                            <div class="form-group">
+                                <input type="submit" value="Kaydet" class="btn btn-success" />
+                            </div>
+                        </form>
+                        <form ng-submit="Guncelle(Ders)" ng-show="eskiKayit">
+                            <div class="form-group">
+                                <label>Ders Adı</label>
+                                <input class="form-control" name="DersAdi" ng-model="Ders.DersAdi" placeholder="Ders adını giriniz." required />
+                            </div>
+                            <div class="form-group">
+                                <label>Ders Açıklaması</label>
+                                <input class="form-control" name="DersAciklamasi" ng-model="Ders.DersAciklamasi" placeholder="Kısa bir açıklama giriniz." required />
+                            </div>
+                            <div class="form-group">
+                                <label>Bölüm Seçiniz</label>
+                                <select class="form-control" ng-model="Ders.BolumId" ng-options="I.TabloId as I.BolumAdi for I in BolumSelectList" required>
+                                    <option value="">Bölüm Seçiniz</option>
+                                </select>
+                            </div>
+                            <input type="hidden" ng-model="Ders.TabloId" name="TabloId" class="btn btn-danger" />
+                            <div class="form-group">
+                                <input type="submit" value="Guncelle" class="btn btn-danger" />
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Ders Adı</th>
+                                        <th>Ders Açıklaması</th>
+                                        <th>Bölüm Adı</th>
+                                        <th>Yeni Ekle  <a ng-click="yeniDersKaydi()"><span class="glyphicon glyphicon-plus"></span></a></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="Ders in DersList | filter:Ara">
+                                        <td>{{$index+1}}</td>
+                                        <td>{{Ders.DersAdi}}</td>
+                                        <td>{{Ders.DersAciklamasi}}</td>
+                                        <td>{{Ders.BolumAdi}}</td>
+                                        <td>
+                                            <a href="#" ng-click="editKayit(Ders)"><span class="glyphicon glyphicon-edit"></span>Düzenle</a>
+                                            <a href="#" ng-click="deleteDersById(Ders)"><span class="fa fa-crosshairs"></span>Sil</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.table-responsive -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section AngularScripts{
+    <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/angularjs/dersler.js"></script>
+}

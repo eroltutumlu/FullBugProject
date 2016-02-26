@@ -1,0 +1,412 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br /><br />
+
+<div class="row" ng-app="hocaModul">
+    <div class="col-md-12">
+
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#hocaKayit" aria-controls="hocaKayit" role="tab" data-toggle="tab">Hoca Kayıt</a></li>
+            <li role="presentation"><a href="#hocaDersKayit" aria-controls="hocaDersKayit" role="tab" data-toggle="tab">Hoca Ders Kayıt</a></li>
+            <li role="presentation"><a href="#hocaListesi" aria-controls="hocaListesi" role="tab" data-toggle="tab">Hoca Listesi</a></li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div role="tabpanel" ng-controller="HocaKayitCtrl" class="tab-pane active" id="hocaKayit">
+                <br />
+                <div class="row">
+                    <div class="col-md-6">
+                        @using (Html.BeginForm("HocaKaydet", "Hoca", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            <div class="form-group">
+                                <label>Ad Soyad</label>
+                                <input type="text" class="form-control" ng-model="AdSoyad" name="AdSoyad" id="AdSoyad" placeholder="Ad Soyad">
+                            </div>
+                            <div class="form-group">
+                                <label>TC Numarası</label>
+                                <input type="text" class="form-control" ng-model="TcNumarasi" name="TcNumarasi" id="TcNumarasi" placeholder="11 haneli Tc numarası">
+                            </div>
+                            <div class="form-group">
+                                <label>Telefon</label>
+                                <input type="text" class="form-control" ng-model="Telefon" name="Telefon" id="Telefon" placeholder="Telefon numarası">
+                            </div>
+                            <div class="form-group">
+                                <label>Adres</label>
+                                <textarea class="form-control" ng-model="Adres" name="Adres" id="Adres" placeholder="Tam adres"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Doğum Yeri</label>
+                                <input type="text" class="form-control" ng-model="DogumYeri" name="DogumYeri" id="Telefon" placeholder="Doğum yeriniz">
+                            </div>
+                                <div class="form-group">
+                                    <label>Doğum Tarihi</label>
+                                    <input type="date" class="form-control" ng-model="DogumTarihi" name="DogumTarihi" id="DogumTarihi" placeholder="Doğum tarihi">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Kullanıcı Adı</label>
+                                    <input type="text" class="form-control" ng-model="KullaniciAdi" name="Name" id="Name" placeholder="Giriş yaparken kullanacağı isim">
+                                </div>
+                                <div class="form-group">
+                                    <label>Kullanıcı Şifre</label>
+                                    <input type="password" class="form-control" ng-model="KullaniciSifre" name="KullaniciSifre" id="KullaniciSifre" placeholder="Kullanışı şifresi">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Profil Fotoğrafı</label>
+                                    <input type="file" id="trigger" class="form-control" onchange="loadFile(event)" name="imageProfil" ng-model="MedyaUrl" accept="image/*" required>
+                                </div>
+                                <button type="submit" class="btn btn-success">Kaydet</button>
+                                <button type="reset" class="btn btn-danger">Temizle</button>
+                                <br />
+
+                        }
+
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-4">Adı Soyadı:</div>
+                            <div class="col-md-offset-4">{{AdSoyad}}</div>
+                        </div><div class="help-block"></div>
+                        <div class="row">
+                            <div class="col-md-4">Tc Numarası:</div>
+                            <div class="col-md-offset-4">{{TcNumarasi}}</div>
+                        </div><div class="help-block"></div>
+                        <div class="row">
+                            <div class="col-md-4">Adres:</div>
+                            <div class="col-md-offset-4">{{Adres}}</div>
+                        </div><div class="help-block"></div>
+                        <div class="row">
+                            <div class="col-md-4">Telefon:</div>
+                            <div class="col-md-offset-4">{{Telefon}}</div>
+                        </div><div class="help-block"></div>
+                        <div class="row">
+                            <div class="col-md-4">Doğum Yeri:</div>
+                            <div class="col-md-offset-4">{{DogumYeri}}</div>
+                        </div><div class="help-block"></div>
+                        <div class="row">
+                            <div class="col-md-4">DogumTarihi:</div>
+                            <div class="col-md-offset-4">{{DogumTarihi | date}}</div>
+                        </div><div class="help-block"></div>
+                        <div class="row">
+                            <div class="col-md-4">KullaniciAdi:</div>
+                            <div class="col-md-offset-4">{{KullaniciAdi}}</div>
+                        </div><div class="help-block"></div>
+                        <div class="row">
+                            <div class="col-md-4">KullaniciSifre:</div>
+                            <div class="col-md-offset-4">{{KullaniciSifre}}</div>
+                        </div><div class="help-block"></div>
+                        <div class="row">
+                            <div class="col-md-4">Profil Fotoğrafı:</div>
+                            <div class="col-md-offset-4">
+                                <img id="imageProfil" class="img-responsive" width="300" height="250" />
+
+                            </div>
+                        </div><div class="help-block"></div>
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="hocaDersKayit" ng-controller="HocaDersCtrl">
+                <br />
+                <div class="row">
+                    <div class="col-md-4">
+                        <form ng-submit="HocaDersKaydet(HocaDers)" ng-show="yeniKayit">
+                            <div class="form-group">
+                                <label>Hoca Seçiniz: </label>
+                                <select class="form-control" ng-model="HocaDers.HocaId" ng-options="I.id as I.label for I in hocaListesi">
+                                    <option value="">Seçiniz</option>
+                                </select>
+                            </div>
+                            <input type="hidden" ng-model="HocaDers.TabloId" name="TabloId" class="btn btn-danger" />
+
+                            <div class="form-group">
+                                <label>Verdiği Dersler</label>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div ng-dropdown-multiselect="" extra-settings="dropdownSetting"
+                                             options="Dersler" name="Dersler" selected-model="DerslerSelected" checkboxes="true">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-pull-4">
+                                        <button type="button" class="btn btn-default" ng-click="Dogrula()">Doğrula</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <ul class="list-group">
+                                <li class="list-group-item" ng-repeat="DersSlct in ListDerslerSelected">
+                                    {{DersSlct.DersAdi}}
+                                </li>
+                            </ul>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-success">Kaydet</button>
+                            </div>
+                        </form>
+
+                        <form ng-submit="HocaDersGuncelle(HocaDers)" ng-show="!yeniKayit">
+                            <div class="form-group">
+                                <label>Hoca Seçiniz: </label>
+                                <select class="form-control" ng-model="HocaDers.HocaId" ng-options="I.id as I.label for I in hocaListesi">
+                                    <option value="">Seçiniz</option>
+                                </select>
+                            </div>
+                            <input type="hidden" ng-model="HocaDers.TabloId" name="TabloId" class="btn btn-danger" />
+
+                            <div class="form-group">
+                                <label>Verdiği Dersler</label>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div ng-dropdown-multiselect="" extra-settings="dropdownSetting"
+                                             options="Dersler" name="Dersler" selected-model="DerslerSelected" checkboxes="true">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-pull-4">
+                                        <button type="button" class="btn btn-default" ng-click="Dogrula()">Doğrula</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <ul class="list-group">
+                                <li class="list-group-item" ng-repeat="DersSlct in ListDerslerSelected">
+                                    {{DersSlct.DersAdi}}
+                                </li>
+                            </ul>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-danger">Güncelle</button>
+                            </div>
+                        </form>
+
+                    </div>
+                    <div class="col-md-8">
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <form class="form-inline well well-sm">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" ng-model="Ara" placeholder="Arama yapın" />
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Hoca Adı</th>
+                                    <th>Verdiği Dersler</th>
+                                    <th>Yeni Ekle  <a ng-click="yeniHocaDersKaydi()"><span class="glyphicon glyphicon-plus"></span></a></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="HocaDers in HocaDersList | filter:Ara">
+                                    <td>{{$index+1}}</td>
+                                    <td>{{HocaDers.AdSoyad}}</td>
+                                    <td>{{HocaDers.DersAdi}}</td>
+                                    <td>
+                                        <a href="#" ng-click="editHocaDersKayit(HocaDers)"><span class="glyphicon glyphicon-edit"></span>Düzenle</a>
+                                        <a href="#" ng-click="deleteHocaDersById(HocaDers)"><span class="fa fa-crosshairs"></span>Sil</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+            <div role="tabpanel" class="tab-pane" id="hocaListesi" ng-controller="HocaListeCtrl">
+                <br />
+                <div class="row">
+                    <div class="col-md-12">
+                        <form class="form-inline well well-sm">
+                            <span class="fa fa-search"></span>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Arama yapın" ng-model="Search.$" />
+                            </div>
+
+                            <span class="glyphicon glyphicon-sort-by-attributes"></span>
+                            <select ng-model="orderUserSelected" class="form-control">
+                                <option value="AdSoyad">Ad Soyad(Artan)</option>
+                                <option value="-AdSoyad">Ad Soyad(Azalan)</option>
+                                <option value="DogumYeri">Doğum Yeri(Artan)</option>
+                                <option value="-DogumYeri">Doğum Yeri(Azalan)</option>
+                            </select>
+
+                            <div class="pull-right">
+                                @if (TempData["UpdatedMessage"] != null)
+	                             {
+		                                 <p class="alert alert-info">@TempData["UpdatedMessage"]</p>
+	                             }
+                            </div>
+                            <div class="clearfix"></div>
+
+                        </form>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-7">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>
+                                        Ad Soyad
+                                        <span ng-click="orderUserSelected='AdSoyad'" class="glyphicon glyphicon-menu-up"></span>
+                                        <span ng-click="orderUserSelected='-AdSoyad'" class="glyphicon glyphicon-menu-down"></span>
+                                    </th>
+                                    <th>TC Numarası</th>
+                                    <th>Telefon</th>
+                                    <th>Doğum Yeri</th>
+                                    <th>Doğum Tarihi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- <div ng-style="isTrue && {'background-color':'green'} || {'background-color': 'blue'}" style="width:200px;height:100px;border:1px solid gray;"></div>  -->
+                                <tr ng-repeat="item in HocaListesiDetails.slice(((currentPage-1)*itemsPerPage), (currentPage*itemsPerPage)) | filter:Search | orderBy:orderUserSelected " ng-style="item.TabloId == selectedHoca && {'background-color':'#ccc'}" ng-click="hocaSec(item.TabloId)">
+                                    <td>{{$index+1}}</td>
+                                    <td>{{item.AdSoyad}}</td>
+                                    <td>{{item.TcNumarasi}}</td>
+                                    <td>{{item.Telefon}}</td>
+                                    <td>{{item.DogumYeri}}</td>
+                                    <td>{{item.DogumTarihi | formattedFilter | date}}</td>
+                                </tr>
+
+                                <tr ng-show="(HocaListesiDetails.slice(((currentPage-1)*itemsPerPage), (currentPage*itemsPerPage)) | filter:Search).length == 0" style="background:#fff;">
+                                    <td colspan="6">
+                                        <div class="alert alert-info">
+                                            <p class="text-center">Aradığınız kişi bulunamadı.</p>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+                        <uib-pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" class="pagination-sm" items-per-page="itemsPerPage"></uib-pagination>
+
+                    </div>
+
+
+                    <div class="col-md-5">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                Detay
+
+                                <button class="btn btn-danger  pull-right">
+                                    Sil
+                                </button>
+
+                                <div class="clearfix"></div>
+
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-12" ng-if="selectedDetails != null">
+                                        @using (Html.BeginForm("HocaGuncelle", "Hoca", FormMethod.Post, new { enctype = "multipart/form-data", @class="form-horizontal" }))
+                                        {
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Ad Soyad</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" name="AdSoyad" ng-model="selectedDetails.AdSoyad" class="form-control" required />
+                                                </div>
+                                            </div>
+
+                                            <input type="hidden" value="{{selectedDetails.ImageId}}" name="ImageId" />
+                                            <input type="hidden" value="{{selectedDetails.TabloId}}" name="TabloId" />
+
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Tc No</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" name="TcNumarasi" ng-model="selectedDetails.TcNumarasi" class="form-control" required />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Telefon</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" name="Telefon" ng-model="selectedDetails.Telefon" class="form-control" required />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Adres</label>
+                                                <div class="col-sm-9">
+                                                    <textarea name="Adres" ng-model="selectedDetails.Adres" class="form-control" required></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Doğum Yeri</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" name="DogumYeri" ng-model="selectedDetails.DogumYeri" class="form-control" required />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Doğum Tarihi</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" name="DogumTarihi" ng-model="FilteredDogumTarihi" class="form-control" required />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Kullanıcı Adı</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" name="Name" ng-model="selectedDetails.Name" class="form-control" required />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Kullanıcı Şifresi</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" name="KullaniciSifre" ng-model="selectedDetails.KullaniciSifre" class="form-control" required />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Önceki Resim</label>
+                                                <div class="col-sm-9">
+                                                    <img ng-src="{{selectedDetails.MedyaUrl}}" class="img-responsive" style="height:150px !important; width:100% !important;" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-3">
+                                                    <input type="file" onchange="loadUpdatedFile(event)" name="imageProfil" ng-model="MedyaUrl" accept="image/*">
+                                                </div>
+
+                                                <div class="col-sm-9">
+                                                    <img id="imageUpdatedProfil" class="img-responsive" style="height:150px !important; width:100% !important;"/>
+
+                                                </div>
+                                            </div><div class="help-block"></div>
+                                            <div class="form-group">
+                                                <div style="padding-left:50px;padding-right:15px;">
+                                                    <button class="btn btn-primary btn-block" type="submit">Güncelle</button>
+                                                </div>
+
+                                            </div>
+                                        }
+                                        
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<br />
+
+@section AngularScripts{
+    <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Scripts/ui-bootstrap-tpls-1.1.2.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.js"></script>
+    <script src="~/Scripts/angularjs-dropdown-multiselect.js"></script>
+    <script src="~/angularjs/hoca.js"></script>
+}

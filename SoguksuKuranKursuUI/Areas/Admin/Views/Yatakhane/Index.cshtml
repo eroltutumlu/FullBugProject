@@ -1,0 +1,95 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<br /><br />
+<div class="row" ng-app="appYatakhane">
+    <div class="col-md-12">
+        <div class="panel panel-green">
+            <div class="panel-heading">
+                Yatakhane İşlemleri
+            </div>
+            <div class="panel-body" ng-controller="YatakhaneCtrl">
+                <div class="row">
+                    <div class="col-md-4">
+                        <form ng-submit="Ekle(Yatakhane)" ng-show="yeniKayit">
+                            <div class="form-group">
+                                <label>Yatakhane Numarası</label>
+                                <input class="form-control" ng-model="Yatakhane.YatakhaneNo" name="YatakhaneNo" placeholder="Yatakhane noyu giriniz" required>
+                                <!--<p class="help-block">Sample text</p>-->
+                            </div>
+                            <div class="form-group">
+                                <label>Yatakhane Açıklaması</label>
+                                <input class="form-control" ng-model="Yatakhane.YatakhaneTanim" required name="YatakhaneTanim" placeholder="Kısa bir açıklama yazabilirsiniz">
+                            </div>
+                            <div class="form-group">
+                                <label>Yatakhane Kişi Sayısı</label>
+                                <input class="form-control" ng-model="Yatakhane.YatakhaneKisiSayisi" required name="YatakhaneKisiSayisi" placeholder="Yatakhane kişi sayısı">
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Kaydet" class="btn btn-success" />
+                            </div>
+                        </form>
+                        <form ng-submit="Guncelle(Yatakhane)" ng-show="eskiKayit">
+                            <div class="form-group">
+                                <label>Yatakhane Numarası</label>
+                                <input class="form-control" ng-model="Yatakhane.YatakhaneNo" name="YatakhaneNo" placeholder="Yatakhane noyu giriniz" required>
+                                @*<p class="help-block">Sample text</p>*@
+                            </div>
+                            <div class="form-group">
+                                <label>Yatakhane Açıklaması</label>
+                                <input class="form-control" ng-model="Yatakhane.YatakhaneTanim" required name="YatakhaneTanim" placeholder="Kısa bir açıklama yazabilirsiniz">
+                            </div>
+                            <div class="form-group">
+                                <label>Yatakhane Kişi Sayısı</label>
+                                <input class="form-control" ng-model="Yatakhane.YatakhaneKisiSayisi" required name="YatakhaneKisiSayisi" placeholder="Yatakhane kişi sayısı">
+                            </div>
+                            <input type="hidden" ng-model="Yatakhane.TabloId" name="TabloId" class="btn btn-danger" />
+                            <div class="form-group">
+                                <input type="submit" value="Guncelle" class="btn btn-danger" />
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Yatakhane No</th>
+                                        <th>Kişi Sayısı</th>
+                                        <th>Yatakhane Açıklaması</th>
+                                        <th>Yeni Ekle  <a ng-click="yeniYatakhaneKaydi()"><span class="glyphicon glyphicon-plus"></span></a></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="yatakhane in YatakhaneListesi">
+                                        <td>{{$index+1}}</td>
+                                        <td>{{yatakhane.YatakhaneNo}}</td>
+                                        <td>{{yatakhane.YatakhaneKisiSayisi}}</td>
+                                        <td>{{yatakhane.YatakhaneTanim}}</td>
+                                        <td>
+                                            <a href="#" ng-click="editKayit(yatakhane)"><span class="glyphicon glyphicon-edit"></span>Düzenle</a>
+                                            <a href="#" ng-click="deleteYatakhaneById(yatakhane)"><span class="fa fa-crosshairs"></span>Sil</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.table-responsive -->
+                    </div>
+                </div>
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+@section AngularScripts{
+<script src="~/Scripts/angular.min.js"></script>
+<script src="~/angularjs/modules/yatakhaneModul.js"></script>
+<script src="~/angularjs/services/yatakhaneFactory.js"></script>
+<script src="~/angularjs/controllers/yatakhaneController.js"></script>
+}

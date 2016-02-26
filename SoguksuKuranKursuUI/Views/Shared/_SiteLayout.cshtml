@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Soğuksu Kur'an Kursu</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/animate.css" type="text/css" rel="stylesheet" />
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>@Html.ActionLink("Anasayfa", "Index", new { Controller = "Home", Area = "Home" })</li>
+                    <li>@Html.ActionLink("Duyurular", "Index", new { Controller = "Home", Area = "Home" })</li>
+                    <li>@Html.ActionLink("Hakkında", "Index", new { Controller = "Home", Area = "Home" })</li>
+                    <li>@Html.ActionLink("İletişim", "Index", new { Controller = "Home", Area = "Home" })</li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                    <li>@Html.ActionLink("Çıkış Yap", "CikisYap", new { Controller = "SystemLogin", Area = "Security" })</li>
+                    }
+                    else
+                    {
+
+                    <li>@Html.ActionLink("Giriş Yap", "Index", new { Controller = "SystemLogin", Area = "Security" })</li>
+
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+    @RenderBody()
+
+    <footer class="wow fadeIn">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <ul>
+                        <li><a href="#">Diyanet İşleri Başkanlığı</a></li>
+                        <li><a href="#">Cumhurbaşkanlığı</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <p><a href="www.eroltutumlu.com" target="_blank">Erol TUTUMLU</a> tarafından oluşturulmuştur &copy;</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="~/Scripts/jquery-2.1.4.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/wow.js"></script>
+    <script src="~/Scripts/angular.min.js"></script>
+
+    <!--WOW JS INIT-->
+    <script>
+        new WOW().init();
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,86 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br /><br />
+
+<div class="row" ng-app="BolumModul">
+    <div class="col-md-12">
+        <div class="panel panel-green">
+            <div class="panel-heading">
+                Bölüm İşlemleri
+            </div>
+            <div class="panel-body" ng-controller="BolumCtrl">
+                <div class="row">
+                    <div class="col-md-4">
+                        <form ng-submit="Ekle(Bolum)" ng-show="yeniKayit">
+                            <div class="form-group">
+                                <label>Bölüm Adı</label>
+                                <input class="form-control" ng-model="Bolum.BolumAdi" name="BolumAdi" placeholder="Bölüm adını giriniz" required>
+                                <!--<p class="help-block">Sample text</p>-->
+                            </div>
+                            <div class="form-group">
+                                <label>Bölüm Açıklaması</label>
+                                <input class="form-control" ng-model="Bolum.BolumAciklama" required name="BolumAciklama" placeholder="Kısa bir açıklama yazabilirsiniz">
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Kaydet" class="btn btn-success" />
+                            </div>
+                        </form>
+                        <form ng-submit="Guncelle(Bolum)" ng-show="eskiKayit">
+                            <div class="form-group">
+                                <label>Bölüm Adı</label>
+                                <input class="form-control" ng-model="Bolum.BolumAdi" name="BolumAdi" placeholder="Bölüm adını giriniz" required>
+                                <!--<p class="help-block">Sample text</p>-->
+                            </div>
+                            <div class="form-group">
+                                <label>Bölüm Açıklaması</label>
+                                <input class="form-control" ng-model="Bolum.BolumAciklama" required name="BolumAciklama" placeholder="Kısa bir açıklama yazabilirsiniz">
+                            </div>
+                            <input type="hidden" ng-model="Bolum.TabloId" name="TabloId" class="btn btn-danger" />
+                            <div class="form-group">
+                                <input type="submit" value="Guncelle" class="btn btn-danger" />
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Bölüm Adı</th>
+                                        <th>Bölüm Açıklaması</th>
+                                        @*<th>Kayıt Tarihi</th>*@
+                                        <th>Yeni Ekle  <a ng-click="yeniBolumKaydi()"><span class="glyphicon glyphicon-plus"></span></a></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="Bolum in BolumListesi">
+                                        <td>{{$index+1}}</td>
+                                        <td>{{Bolum.BolumAdi}}</td>
+                                        <td>{{Bolum.BolumAciklama}}</td>
+                                        @*<td>{{Bolum.KayitTarihi}}</td>*@
+                                        <td>
+                                            <a href="#" ng-click="editKayit(Bolum)"><span class="glyphicon glyphicon-edit"></span>Düzenle</a>
+                                            <a href="#" ng-click="deleteBolumById(Bolum)"><span class="fa fa-crosshairs"></span>Sil</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.table-responsive -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section AngularScripts{
+    <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/angularjs/bolumler.js"></script>
+}
